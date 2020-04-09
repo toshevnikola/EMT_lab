@@ -1,0 +1,55 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <title>Books</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <label class="text-danger" th:text="${param.error}"></label>
+            <table class="table table-striped">
+                    <tr>
+                        <th></th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Copies</th>
+                        <th>Category</th>
+                        <th> </th>
+                    </tr>
+
+                    <tr th:each="book: ${books}">
+                        <td><img th:src="${book.getBase64Img()}" style="width: 50px;height: 50px"></td>
+                        <td th:text="${book.getId()}"></td>
+                        <td th:text="${book.getName()}"></td>
+                        <td th:text="${book.getCopies()}"></td>
+                        <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
+                        <td>
+                            <a class="btn btn-sm btn-info" th:href="@{/books/{id}/edit(id=${book.id})}">Edit</a>
+                            <a class="btn btn-sm btn-danger" th:href="@{/books/{id}/delete(id=${book.id})}">Delete</a>
+                        </td>
+                    </tr>
+            </table>
+
+            <a href="/books/add" class="btn btn-primary btn"role="button" aria-pressed="true" style="margin-bottom: 15px;float:right;">Add Book</a>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous">
+
+</script>
+</body>
+</html>
